@@ -7,5 +7,6 @@ namespace Zulu_Project.Repositories.IRepositories
 {
     interface ICompanyRepository
     {
+        //ICollection<>
     }
 }
