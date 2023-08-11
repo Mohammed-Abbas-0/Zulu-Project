@@ -1,4 +1,5 @@
 using AspCoreApI_Project.AppContext;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Zulu_Project.Mapper;
 
 namespace Zulu_Project
 {
@@ -28,8 +30,9 @@ namespace Zulu_Project
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            // Service To Connect With Db
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddAutoMapper(typeof(ObjectMapper));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
