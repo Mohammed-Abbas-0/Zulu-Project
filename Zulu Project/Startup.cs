@@ -15,6 +15,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Zulu_Project.Mapper;
+using Zulu_Project.Repositories;
+using Zulu_Project.Repositories.IRepositories;
 
 namespace Zulu_Project
 {
@@ -32,7 +34,10 @@ namespace Zulu_Project
         {
             // Service To Connect With Db
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // Auto Mapper
             services.AddAutoMapper(typeof(ObjectMapper));
+            // Scopped With Repository
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -10,12 +10,12 @@ namespace Zulu_Project.Repositories.IRepositories
    public interface ICompanyRepository
     {
         Task<List<Company>> GetAll();
-        Task<Company> GetById();
+        Task<Company> GetById(int Id);
         Task<Company> Create(Company Company);
         Task<Company> Update(Company Company);
         Task<bool> IsExsited(int Id);
         Task<bool> IsExsited(string Name);
-        Task<Company> Delete(int Id);
+        Task<Company> Delete(Company Company);
         Task<bool> Save();
     }
 }
