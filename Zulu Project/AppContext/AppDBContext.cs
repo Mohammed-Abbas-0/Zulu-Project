@@ -14,5 +14,6 @@ namespace AspCoreApI_Project.AppContext
 
         }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<Branch> Branches { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-using AspCoreApI_Project.AppContext;
+﻿using AspCoreApI_Project.AppContext;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,11 +38,23 @@ namespace Zulu_Project
             services.AddAutoMapper(typeof(ObjectMapper));
             // Scopped With Repository
             services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IBranchRepository, BranchRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Zulu_Project", Version = "v1" });
+                c.SwaggerDoc("Zulu_V1", new OpenApiInfo { 
+                    Title = "Zulu_Project", 
+                    Version = "v1" ,
+                    Description="Zulu Version 1",
+                    Contact= new OpenApiContact() {
+                        Email = "mohammed-abbas0@outlook.com",
+                        Name="Mohammed Abbas",
+                        Url=new Uri("https://www.linkedin.com/in/mohammed-abbas-8b5b76184/")
+                    
+                    }
+                });
+                
             });
         }
 
@@ -53,7 +65,7 @@ namespace Zulu_Project
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Zulu_Project v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/Zulu_V1/swagger.json", "Zulu_Project v1")); //  Swagger خاص بالانترفيس الخاص ب 
             }
 
             app.UseHttpsRedirection();

@@ -12,7 +12,7 @@ using Zulu_Project.Repositories.IRepositories;
 
 namespace Zulu_Project.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Company")]
     [ApiController]
     public class CompanyController : ControllerBase
     {
@@ -26,6 +26,8 @@ namespace Zulu_Project.Controllers
 
         #region Get Companies
         [HttpGet("GetCompanies")]
+        [ProducesResponseType(200, Type = typeof(List<CompanyDTO>))]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> GetAll()
         {
             List<Company> Companies =  await _companyRepository.GetAll();
@@ -41,6 +43,10 @@ namespace Zulu_Project.Controllers
         #region Get Company By ID
 
         [HttpGet("GetCompanyById/{Id:int}",Name = "GetCompanyById")]
+        [ProducesResponseType(200,Type=typeof(CompanyDTO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesDefaultResponseType]
         public async Task<IActionResult> GetCompanyById(int Id)
         {
             if (Id <= 0)
@@ -63,7 +69,7 @@ namespace Zulu_Project.Controllers
         {
             if (companyDTO is null)
                 return BadRequest();
-            if (await _companyRepository.IsExsited(companyDTO.Id) || await _companyRepository.IsExsited(companyDTO.CompanyName))
+            if ((companyDTO.Id > 0 && await _companyRepository.IsExsited(companyDTO.Id)) || await _companyRepository.IsExsited(companyDTO.CompanyName))
             {
                 ModelState.AddModelError("", "Company Already Existed Before");
                 return StatusCode(404, ModelState);

@@ -13,6 +13,9 @@ namespace Zulu_Project.Mapper
         public ObjectMapper()
         {
             CreateMap<Company,CompanyDTO>().ReverseMap();
+            CreateMap<Branch,BranchDTO>().ReverseMap();
+            CreateMap<Branch, BranchCreatedDTO>().ReverseMap();
+            CreateMap<Branch, BranchUpdateDTO>().ReverseMap();
         }
     }
 }
