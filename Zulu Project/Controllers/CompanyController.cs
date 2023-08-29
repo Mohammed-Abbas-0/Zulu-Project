@@ -13,16 +13,20 @@ using Zulu_Project.Repositories.IRepositories;
 namespace Zulu_Project.Controllers
 {
     [Route("api/Company")]
+    [ApiExplorerSettings(GroupName = "Company_V1")]
     [ApiController]
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyRepository _companyRepository;
         private readonly IMapper _mapper;
+
+        #region Constructor DI
         public CompanyController(ICompanyRepository companyRepository, IMapper mapper)
         {
             _companyRepository = companyRepository;
             _mapper = mapper;
         }
+        #endregion
 
         #region Get Companies
         [HttpGet("GetCompanies")]

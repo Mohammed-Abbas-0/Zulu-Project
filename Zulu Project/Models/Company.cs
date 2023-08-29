@@ -14,6 +14,7 @@ namespace Zulu_Project.Models
         public string CompanyName { get; set; }
         [Required]
         public string CompanyCode { get; set; }
+        public byte[]? Image { get; set; }
         public int? Employees { get; set; }
         [Display(Name = "Date of Establishment")]
         public DateTime? Created { get; set; }

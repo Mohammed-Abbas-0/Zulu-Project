@@ -13,6 +13,9 @@ using Zulu_Project.Repositories.IRepositories;
 namespace Zulu_Project.Controllers
 {
     [Route("api/Branch")]
+    [ApiExplorerSettings(GroupName = "Branch_V1")]
+    //[ApiExplorerSettings(GroupName = "Company_V1")]
+
     [ApiController]
     public class BranchController : ControllerBase
     {

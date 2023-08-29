@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,18 +44,37 @@ namespace Zulu_Project
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("Zulu_V1", new OpenApiInfo { 
-                    Title = "Zulu_Project", 
-                    Version = "v1" ,
-                    Description="Zulu Version 1",
-                    Contact= new OpenApiContact() {
+                c.SwaggerDoc("Company_V1", new OpenApiInfo {
+                    Title = "Zulu_Project",
+                    Version = "v1",
+                    Description = "Zulu Version 1 (Company)",
+                    Contact = new OpenApiContact() {
                         Email = "mohammed-abbas0@outlook.com",
-                        Name="Mohammed Abbas",
-                        Url=new Uri("https://www.linkedin.com/in/mohammed-abbas-8b5b76184/")
-                    
+                        Name = "Mohammed Abbas",
+                        Url = new Uri("https://www.linkedin.com/in/mohammed-abbas-8b5b76184/")
+
+                    }
+
+
+            });
+                c.SwaggerDoc("Branch_V1", new OpenApiInfo
+                {
+                    Title = "Zulu_Project",
+                    Version = "v1",
+                    Description = "Zulu Version 1 (Branch)",
+                    Contact = new OpenApiContact()
+                    {
+                        Email = "mohammed-abbas0@outlook.com",
+                        Name = "Mohammed Abbas",
+                        Url = new Uri("https://www.linkedin.com/in/mohammed-abbas-8b5b76184/")
+
                     }
                 });
-                
+            });
+            services.AddApiVersioning(idx=> {
+                idx.AssumeDefaultVersionWhenUnspecified = true;
+                idx.DefaultApiVersion = new ApiVersion(1,0);
+                idx.ReportApiVersions = true;
             });
         }
 
@@ -65,7 +85,12 @@ namespace Zulu_Project
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/Zulu_V1/swagger.json", "Zulu_Project v1")); //  Swagger خاص بالانترفيس الخاص ب 
+                //  Swagger خاص بالانترفيس الخاص ب 
+                app.UseSwaggerUI(c => {
+                    c.SwaggerEndpoint("/swagger/Company_V1/swagger.json", "Zulu_Project Company v1");
+                    c.SwaggerEndpoint("/swagger/Branch_V1/swagger.json", "Zulu_Project Branch v1");
+
+                }); 
             }
 
             app.UseHttpsRedirection();
